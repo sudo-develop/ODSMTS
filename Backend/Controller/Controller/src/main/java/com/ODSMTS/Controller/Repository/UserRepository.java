@@ -7,8 +7,10 @@ import com.ODSMTS.Controller.Entity.User;
 
 import java.util.Optional;
 
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsername(String username);
+    Optional<User> findByUsername(String username);  // Check if username exists
+    Optional<User> findByEmail(String email);        // Check if email exists
 }
 

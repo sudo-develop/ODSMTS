@@ -44,7 +44,7 @@ public class LoginController {
     //     return ResponseEntity.ok(Map.of("token", token));
     // }
 
-    @PostMapping("/login")
+   /*@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
     Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
 
@@ -57,8 +57,54 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token = jwtUtil.generateToken(user.getUsername(), roleId.getRoleId());
+    return ResponseEntity.ok(new LoginResponse("Login successful", token, user.getUsername(), user.getRoleId()));
+}*/
+/* 
+@PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
+
+    if (optionalUser.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    User user = optionalUser.get();
+    if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    // Generate token with username and roleId
+    String token = jwtUtil.generateToken(user.getUsername(), user.getRoleId());
+
     return ResponseEntity.ok(new LoginResponse("Login successful", token, user.getUsername(), user.getRoleId()));
 }
+*/
+
+@PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
+
+    if (optionalUser.isEmpty()) {
+        System.out.println("❌ User not found: " + request.getUsername());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    User user = optionalUser.get();
+
+    System.out.println("✅ User found: " + user.getUsername());
+    System.out.println("🔐 Hashed Password in DB: " + user.getPasswordHash());
+    System.out.println("🔑 Entered Password: " + request.getPassword());
+    System.out.println("🔄 Matching Passwords: " + passwordEncoder.matches(request.getPassword(), user.getPasswordHash()));
+
+    if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+        System.out.println("❌ Password does not match!");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    String token = jwtUtil.generateToken(user.getUsername(), user.getRoleId());
+    return ResponseEntity.ok(new LoginResponse("Login successful", token, user.getUsername(), user.getRoleId()));
+}
+
 
 }
