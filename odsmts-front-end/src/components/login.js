@@ -1,35 +1,36 @@
 import { useState } from "react";
+import { loginUser } from "../api";  // Ensure correct API import
+import "./styles/login-style.css";  // Import the CSS file
 import { useNavigate } from "react-router-dom";
-import "../styles/login.css";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
+const Login = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [userType, setUserType] = useState("user");
-
+  const [userData, setUserData] = useState(null);  // Store API response
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
+    try {
+      const response = await loginUser(username, password);
+      console.log("Login Successful:", response);
+      
+      // Store response in state or localStorage
+      setUserData(response);
+      localStorage.setItem("token", response.token);  // Save JWT token
+      localStorage.setItem("username", response.username);
+      localStorage.setItem("roleId", response.roleId);
 
-    if (!email || !password) {
-      setError("Both fields are required!");
-      return;
-    }
+      if (response.roleId === 2) {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/user-dashboard");
+      }
 
-    console.log("Logging in as:", userType, { email, password });
-
-    // Set authentication state in localStorage
-    localStorage.setItem("isAuthenticated", "true");
-    localStorage.setItem("userType", userType);
-
-    // Navigate to the correct dashboard
-    if (userType === "admin") {
-      navigate("/admin-dashboard");
-    } else {
-      navigate("/user-dashboard");
+    } catch (err) {
+      console.error("Login Failed:", err);
+      setError(err.message || "Login failed");
     }
   };
 
@@ -37,26 +38,22 @@ export default function Login() {
     <div className="login-container">
       <div className="login-box">
         <h2 className="login-title">Login</h2>
-        {error && <p className="error-text">{error}</p>}
         <form onSubmit={handleLogin}>
           <div className="input-group">
-            <label>User Type</label>
-            <select value={userType} onChange={(e) => setUserType(e.target.value)}>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-          <div className="input-group">
-            <label>Email</label>
-            <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label>Username</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div className="input-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit">Login</button>
         </form>
+        {error && <p className="error-text">{error}</p>}
+        {userData && <p className="success-text">Welcome, {userData.username}! Role ID: {userData.roleId}</p>}
       </div>
     </div>
   );
-}
+};
+
+export default Login;

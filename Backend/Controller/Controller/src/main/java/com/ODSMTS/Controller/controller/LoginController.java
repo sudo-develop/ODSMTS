@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 //import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -93,8 +94,6 @@ public ResponseEntity<?> login(@RequestBody LoginRequest request) {
     User user = optionalUser.get();
 
     System.out.println("✅ User found: " + user.getUsername());
-    System.out.println("🔐 Hashed Password in DB: " + user.getPasswordHash());
-    System.out.println("🔑 Entered Password: " + request.getPassword());
     System.out.println("🔄 Matching Passwords: " + passwordEncoder.matches(request.getPassword(), user.getPasswordHash()));
 
     if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
