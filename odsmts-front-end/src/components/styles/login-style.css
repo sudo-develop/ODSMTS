@@ -5,8 +5,11 @@
     align-items: center;
     height: 100vh;
     background-color: #f3f4f6;
+    gap: 50px; /* Space between login box and image */
+    padding: 20px;
 }
 
+/* Remove position: relative & left offset */
 .login-box {
     background: white;
     padding: 25px;
@@ -34,6 +37,7 @@
     flex-direction: column;
     text-align: left;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .input-group label {
@@ -42,19 +46,51 @@
     color: #555;
 }
 
+/* Align input fields properly */
 .input-group input {
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
     outline: none;
     transition: 0.3s;
+    box-sizing: border-box; /* Ensure proper width calculation */
 }
 
 .input-group input:focus {
     border-color: #007bff;
 }
 
+/* Align Password Field Properly */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between; /* Ensure alignment */
+}
+
+.password-container input {
+    flex: 1; /* Allow input to take available space */
+    padding-right: 40px; /* Ensure space for the eye icon */
+}
+
+/* Adjust the position of the eye button */
+.eye-button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Login button styling */
 .login-button {
     width: 100%;
     padding: 10px;
@@ -69,4 +105,27 @@
 
 .login-button:hover {
     background-color: #0056b3;
+}
+
+/* Image container for right-side image */
+.image-container {
+    width: 400px;
+    max-width: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .image-container {
+        width: 300px;
+    }
 }
