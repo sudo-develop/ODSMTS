@@ -37,6 +37,7 @@ public class UserService {
             newUser.setEmail(request.getEmail());
             newUser.setPasswordHash(passwordEncoder.encode(request.getPassword()));
             newUser.setRoleId(request.getRoleId());
+            newUser.setHospitalId(request.getHospitalId()); // ✅ Added hospitalId
 
             return userRepository.save(newUser);
         } catch (DataIntegrityViolationException e) {
