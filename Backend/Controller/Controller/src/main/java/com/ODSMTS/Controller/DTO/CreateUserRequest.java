@@ -16,6 +16,9 @@ public class CreateUserRequest {
     @JsonProperty("roleId")
     private int roleId;
 
+    @JsonProperty("hospitalId")
+    private int hospitalId;  // Fix variable naming (lowercase 'h')
+
     // Getters and Setters
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
@@ -28,4 +31,7 @@ public class CreateUserRequest {
 
     public int getRoleId() { return roleId; }
     public void setRoleId(int roleId) { this.roleId = roleId; }
+
+    public int getHospitalId() { return hospitalId; }  // Fix getter to return hospitalId
+    public void setHospitalId(int hospitalId) { this.hospitalId = hospitalId; }  // Fix setter
 }

@@ -1,0 +1,17 @@
+/* dashboard-style.css */
+.dashboard-container {
+    margin-left: 270px; /* To avoid overlapping with sidebar */
+    padding: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-welcome {
+    font-size: 18px;
+    color: #555;
+  }
+  

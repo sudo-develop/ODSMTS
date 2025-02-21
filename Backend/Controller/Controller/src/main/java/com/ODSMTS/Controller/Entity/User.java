@@ -1,6 +1,5 @@
 package com.ODSMTS.Controller.Entity;
 
-
 import jakarta.persistence.*; // JPA annotations
 import java.sql.Timestamp;  // For createdAt column
 
@@ -24,17 +23,21 @@ public class User {
     @Column(nullable = false)
     private int roleId; // Foreign key reference to roles table
 
+    @Column(nullable = true) // Can be null if the user is not assigned to a hospital
+    private Integer hospitalId; // Foreign key reference to hospital table
+
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
     // Constructors
     public User() {}
 
-    public User(String username, String email, String passwordHash, int roleId) {
+    public User(String username, String email, String passwordHash, int roleId, Integer hospitalId) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
         this.roleId = roleId;
+        this.hospitalId = hospitalId;
     }
 
     // Getters & Setters
@@ -52,6 +55,9 @@ public class User {
 
     public int getRoleId() { return roleId; }
     public void setRoleId(int roleId) { this.roleId = roleId; }
+
+    public Integer getHospitalId() { return hospitalId; }
+    public void setHospitalId(Integer hospitalId) { this.hospitalId = hospitalId; }
 
     public Timestamp getCreatedAt() { return createdAt; }
 }
