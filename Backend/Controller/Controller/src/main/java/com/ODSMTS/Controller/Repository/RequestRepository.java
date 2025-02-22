@@ -9,43 +9,66 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.jdbc.core.RowMapper;
 
 @Repository
 public class RequestRepository {
-    private final JdbcTemplate jdbcTemplate;
-    private final SimpleJdbcInsert requestInserter;
 
-    @Autowired
+    private final JdbcTemplate jdbcTemplate;
+    private final RowMapper<Request> rowMapper = new RequestRowMapper();
+
     public RequestRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.requestInserter = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("requests")
-                .usingGeneratedKeyColumns("id");
     }
 
-    public Request save(Request request) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("drug_id", request.getDrugId());
-        parameters.put("drug_form_id", request.getDrugFormId());
-        parameters.put("created_by", request.getCreatedBy());
-        parameters.put("fulfilled_by", request.getFulfilledBy());
-        parameters.put("quantity", request.getQuantity());
-        parameters.put("fulfilled_quantity", request.getFulfilledQuantity());
-        parameters.put("request_date", request.getRequestDate());
-        parameters.put("status", request.getStatus().name());
-
-        Number generatedId = requestInserter.executeAndReturnKey(parameters);
-        request.setId(generatedId.longValue());
-        return request;
+    // Create
+    public void save(Request request) {
+        String sql = "INSERT INTO requests (drug_id, drug_form_id, created_by, fulfilled_by, quantity, fulfilled_quantity, request_date, status) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(
+            sql,
+            request.getDrugId(),
+            request.getDrugFormId(),
+            request.getCreatedBy(),
+            request.getFulfilledBy(),
+            request.getQuantity(),
+            request.getFulfilledQuantity(),
+            request.getRequestDate(),
+            request.getStatus().name()
+        );
     }
 
-    public List<Request> findByCreatedBy(Long hospitalId) {
-        String sql = "SELECT * FROM requests WHERE created_by = ?";
-        return jdbcTemplate.query(sql, new RequestRowMapper(), hospitalId);
+    // Read
+    public Request findById(Long id) {
+        String sql = "SELECT * FROM requests WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
-    public void updateStatus(Long requestId, Request.RequestStatus status) {
-        String sql = "UPDATE requests SET status = ? WHERE id = ?";
-        jdbcTemplate.update(sql, status.name(), requestId);
+    public List<Request> findAll() {
+        String sql = "SELECT * FROM requests";
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    // Update
+    public void update(Request request) {
+        String sql = "UPDATE requests SET drug_id = ?, drug_form_id = ?, fulfilled_by = ?, quantity = ?, " +
+                     "fulfilled_quantity = ?, request_date = ?, status = ? WHERE id = ?";
+        jdbcTemplate.update(
+            sql,
+            request.getDrugId(),
+            request.getDrugFormId(),
+            request.getFulfilledBy(),
+            request.getQuantity(),
+            request.getFulfilledQuantity(),
+            request.getRequestDate(),
+            request.getStatus().name(),
+            request.getId()
+        );
+    }
+
+    // Delete
+    public void deleteById(Long id) {
+        String sql = "DELETE FROM requests WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 }
