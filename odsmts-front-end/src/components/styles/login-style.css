@@ -1,11 +1,17 @@
 /* Login Page Styling */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f3f4f6;
-    gap: 50px; /* Space between login box and image */
+    gap: 50px; 
     padding: 20px;
 }
 
@@ -59,21 +65,21 @@
 }
 
 .input-group input:focus {
-    border-color: #007bff;
+    border: 1px solid #ff0000;
 }
 
 /* Align Password Field Properly */
 .password-container {
     position: relative;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
-    justify-content: space-between; /* Ensure alignment */
+    justify-content: space-between; 
 }
 
 .password-container input {
-    flex: 1; /* Allow input to take available space */
-    padding-right: 40px; /* Ensure space for the eye icon */
+    flex: 1; 
+    padding-right: 40px; 
 }
 
 /* Adjust the position of the eye button */
@@ -91,21 +97,30 @@
 
 
 /* Login button styling */
+
 .login-button {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
+    padding: 12px;
+    background: #ff3131;
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 8px;
+    font: 1em times-new-roman;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+    letter-spacing: 1px;
 }
 
 .login-button:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
 
 /* Image container for right-side image */
 .image-container {

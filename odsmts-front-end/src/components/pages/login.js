@@ -5,7 +5,7 @@ import { loginUser } from "../../api";  // Corrected path
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import "../styles/login-style.css";  // Corrected path
-import loginImage from "../../assets/login-image.png";  // Corrected path
+import loginImage from "../../assets/logo-image.png";  // Corrected path
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -52,11 +52,6 @@ const Login = () => {
           </div>
           <div className="input-group password-container">
             <label>Password</label>
-            <input 
-              type={showPassword ? "text" : "password"} 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-            />
             <button 
               type="button" 
               className="eye-button"
@@ -64,8 +59,20 @@ const Login = () => {
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
+            <input 
+              type={showPassword ? "text" : "password"} 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            />
+            {/* <button 
+              type="button" 
+              className="eye-button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button> */}
           </div>
-          <button type="submit">Login</button>
+          <button className="login-button" type="submit">Login</button>
         </form>
         {error && <p className="error-text">{error}</p>}
       </div>

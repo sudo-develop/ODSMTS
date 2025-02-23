@@ -2,22 +2,25 @@
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #2c3e50; /* Dark blue */
-    color: white;
+    background-color: #d0d0d0; /* Dark blue */
+    color: rgb(0, 0, 0);
     position: fixed;
     top: 0;
     left: 0;
-    padding: 20px;
+    padding: 10px;
   }
   
   .sidebar h2 {
     font-size: 22px;
     margin-bottom: 20px;
+    margin-top: 40px;
+    margin-left: 20px;
   }
   
   .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 20px;
   }
   
   .sidebar ul li {
@@ -25,16 +28,16 @@
   }
   
   .sidebar ul li a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     display: block;
     padding: 10px;
     transition: 0.3s;
   }
   
   .sidebar ul li a:hover {
-    background-color: #1a252f;
+    background-color: #7d7d7d;
     border-radius: 5px;
   }
   

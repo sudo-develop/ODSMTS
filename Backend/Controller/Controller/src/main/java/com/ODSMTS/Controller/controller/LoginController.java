@@ -27,6 +27,8 @@ public class LoginController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    
+
     // @PostMapping("/login")
     // public ResponseEntity<?> login(@RequestBody LoginRequest request) {
     //     Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
@@ -94,6 +96,7 @@ public ResponseEntity<?> login(@RequestBody LoginRequest request) {
     User user = optionalUser.get();
 
     System.out.println("✅ User found: " + user.getUsername());
+    System.out.println("🔒 Password: " + passwordEncoder.encode("demo"));
     System.out.println("🔄 Matching Passwords: " + passwordEncoder.matches(request.getPassword(), user.getPasswordHash()));
 
     if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
