@@ -1,10 +1,10 @@
-/* Login Page Styling */
+/* Login Page Styling
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f3f4f6;
+    background-color: #b0caff;
   }
   
   .login-box {
@@ -42,4 +42,4 @@
     color: #555;
   }
   
-  
+   */

@@ -70,5 +70,4 @@ public class LoginController {
                 hospital  // Include hospital details in response
         ));
     }
-}
-
+}    

@@ -14,7 +14,7 @@ const apiClient = axios.create({
 export const apis = {
   auth: {
     login: "/login",
-   
+    createUser: "/create"
   },
 };
 
