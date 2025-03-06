@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { data } from "react-router-dom";
-import "../styles/request-table.css";
+import "../styles/table.css";
 
 const RequestTable = () => {
 //   const [data, setData] = useState([]);
@@ -16,25 +16,28 @@ const RequestTable = () => {
 
   const data = [
     {
-      id: 1,
-      name: "Abc Xyz",
-      email: "example.com",
-      phone: "1234567890",
-        status: "Pending",
+      date: 1,
+      hospital_name: "Abc Xyz",
+      drug_name: "example.com",
+      quantity: "1234567890",
+      status: "Pending",
+      action: "Edit",
     },
     {
-      id: 2,
-      name: "pqr stu",
-      email: "example.com",
-      phone: "1234567890",
-      status: "Approved",
+      date: 1,
+      hospital_name: "Abc Xyz",
+      drug_name: "example.com",
+      quantity: "1234567890",
+      status: "Pending",
+      action: "Edit",
     },
     {
-      id: 3,
-      name: "lamda",
-      email: "example.com",
-      phone: "1234567890",
-      status: "Rejected",
+      date: 1,
+      hospital_name: "Abc Xyz",
+      drug_name: "example.com",
+      quantity: "1234567890",
+      status: "Pending",
+      action: "Edit",
     }];
 
   return (
@@ -42,22 +45,24 @@ const RequestTable = () => {
       <table className="min-w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
-            <th className="border p-2">ID</th>
-            <th className="border p-2">Name</th>
-            <th className="border p-2">Email</th>
-            <th className="border p-2">Phone</th>
-            <th className="border p-2">Status</th>
+            <th className="border p-2">DATE</th>
+            <th className="border p-2">HOSPITAL NAME</th>
+            <th className="border p-2">DRUG NAME</th>
+            <th className="border p-2">QTY</th>
+            <th className="border p-2">STATUS</th>
+            <th className="border p-2">ACTION</th>
           </tr>
         </thead>
         <tbody>
           {data.length > 0 ? (
             data.map((item) => (
               <tr key={item.id} className="border">
-                <td className="border p-2">{item.id}</td>
-                <td className="border p-2">{item.name}</td>
-                <td className="border p-2">{item.email}</td>
-                <td className="border p-2">{item.phone}</td>
+                <td className="border p-2">{item.date}</td>
+                <td className="border p-2">{item.hospital_name}</td>
+                <td className="border p-2">{item.drug_name}</td>
+                <td className="border p-2">{item.quantity}</td>
                 <td className="border p-2">{item.status}</td>
+                <td className="border p-2">{item.action}</td>
               </tr>
             ))
            ) : (
