@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux"; 
 import "../styles/table.css";
 import { HospitalInventory } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const HospitalInventoryTable = () => {
   const [data, setData] = useState([]); 
@@ -19,8 +20,16 @@ const HospitalInventoryTable = () => {
     fetchData();
   }, [token]); 
 
+  const navigate = useNavigate();
+
   return (
     <div className="overflow-x-auto">
+      <div className="createInventroy">
+      <button className="createInventroybtn" onClick={() => navigate("/hospital-reports")}>
+            Create
+      </button>
+      </div>
+      <br/>
       <table className="min-w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
