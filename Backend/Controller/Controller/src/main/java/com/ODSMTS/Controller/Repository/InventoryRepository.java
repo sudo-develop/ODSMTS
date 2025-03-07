@@ -8,11 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -111,7 +108,7 @@ public class InventoryRepository {
             "LEFT JOIN hospitals hs ON iv.current_hospital_id = hs.id " +
             "LEFT JOIN orphan_drugs od ON iv.drug_id = od.id " +
             "LEFT JOIN drug_form df ON iv.drug_form_id = df.id " +
-            "WHERE iv.hospital_id = ? " +
+            "WHERE iv.current_hospital_id = ? " +
             "GROUP BY hs.name, od.drug_name, df.form_name, od.quantity_per_unit, iv.expiry_date";
     
         return jdbcTemplate.query(sql, detailsRowMapper, hospitalId);
