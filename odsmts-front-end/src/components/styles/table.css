@@ -1,4 +1,3 @@
-/* request-table.css */
 
 .overflow-x-auto {
   overflow-x: auto;
@@ -67,4 +66,21 @@ tfoot {
 .total {
   color: red;
   font-weight: bold;
+}
+
+.createInventroy{
+  width: 100%;
+  height: 6vh;
+}
+
+.createInventroybtn{
+  width: 10%;
+  height: 100%;
+  margin-left: 90%;
+  border-radius: 10vh;
+  color: rgb(0, 0, 0);
+  background-color: #ff5a5a;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  cursor:pointer;
 }
