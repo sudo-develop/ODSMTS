@@ -20,9 +20,9 @@ const Sidebar = () => {
             <div className="sidebar">
               <h2>Hospital Panel</h2>
               <ul>
-                <li><Link to="/admin-dashboard">Dashboard</Link></li>
-                <li><Link to="/manage-users">Manage Users</Link></li>
-                <li><Link to="/reports">Reports</Link></li>
+                <li><Link to="/hospital-dashboard">Dashboard</Link></li>
+                <li><Link to="/hospital-inventory">Inventory</Link></li>
+                <li><Link to="/hospital-reports">Reports</Link></li>
               </ul>
             </div>
           )}

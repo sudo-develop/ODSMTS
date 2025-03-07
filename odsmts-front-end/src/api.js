@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const baseURL = "http://localhost:8080/api"
 
@@ -18,7 +19,11 @@ const apiClient = axios.create({
 export const apis = {
   auth: {
     login: "/login",
-    createUser: "/create"
+    createUser: "/create",
+    inventory: {
+      hospital:"/inventory/hospital/{id}",
+      admin: "/inventory/admin/{id}",
+    }
   },
 };
 
@@ -35,8 +40,25 @@ export const loginUser = async (username, password) => {
       console.error("Login Error:", error.response?.data || error);
       throw error.response?.data?.message || "Login failed";
     }
-  };
-  
+};
 
-// Export API client and endpoints
+export const HospitalInventory = async (id, token) => {
+  try {
+    const response = await apiClient.get(apis.auth.inventory.hospital.replace("{id}", id), 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    console.log("API Response:", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error.response?.data || error);
+    throw error.response?.data?.message || "Failed to fetch inventory data";
+  }
+};
+  
 export { apiClient, baseURL };

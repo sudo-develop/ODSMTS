@@ -1,18 +1,18 @@
 import Sidebar from "../sidebar/sidebar";
-import RequestTable from "../tables/request-table";
+import HospitalReportTable from "../tables/hospital-report-table";
 
 
-const HospitalDashboard = () => {
+const HospitalReport = () => {
   return (
     <div className="dashboard-container">
       <Sidebar />
       <div className="content">
-      <h1>Hospital Dashboard</h1>
+      <h1>Hospital Report</h1>
       <br/>
-      <RequestTable />
+      <HospitalReportTable />
       </div>
     </div>
   );
 };
 
-export default HospitalDashboard;
+export default HospitalReport;
