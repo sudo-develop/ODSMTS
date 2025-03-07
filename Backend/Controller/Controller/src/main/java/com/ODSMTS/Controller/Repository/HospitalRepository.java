@@ -29,7 +29,7 @@ public class HospitalRepository {
         );
     }
 
-    public Hospital findById(Long id) {
+    public Hospital findById(Integer id) {
         String sql = "SELECT * FROM hospitals WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }

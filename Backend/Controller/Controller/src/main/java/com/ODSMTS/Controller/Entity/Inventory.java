@@ -26,10 +26,14 @@ public class Inventory {
     public void setDrugFormId(Long drugFormId) { this.drugFormId = drugFormId; }
     public LocalDate getExpiryDate() { return expiryDate; }
     public void setExpiryDate(LocalDate expiryDate) { this.expiryDate = expiryDate; }
-    public Boolean getExpired() { return isExpired; }
-    public void setExpired(Boolean expired) { isExpired = expired; }
-    public Boolean getConsumed() { return isConsumed; }
-    public void setConsumed(Boolean consumed) { isConsumed = consumed; }
+    public Boolean getExpired() {  return isExpired != null ? isExpired : false; }
+    public void setExpired(Boolean expired) { 
+        this.isExpired = expired != null ? expired : false; 
+    }
+    public Boolean getConsumed() {  return isConsumed != null ? isConsumed : false;  }
+    public void setConsumed(Boolean consumed) { 
+        this.isConsumed = consumed != null ? consumed : false; 
+    }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }

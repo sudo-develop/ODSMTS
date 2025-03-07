@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.ODSMTS.Controller.DTO.InventoryDetailsDTO;
+import com.ODSMTS.Controller.Entity.Inventory;
 import com.ODSMTS.Controller.Repository.InventoryRepository;
 
 @Service
@@ -16,5 +17,15 @@ public class InventoryService {
 
     public List<InventoryDetailsDTO> getInventoryDetailsByHospitalId(Long hospitalId) {
         return inventoryRepository.findInventoryDetailsByHospitalId(hospitalId);
+    }
+
+    public Integer saveInventory(Inventory inventory) {
+        if (inventory.getExpired() == null) {
+            inventory.setExpired(false);
+        }
+        if (inventory.getConsumed() == null) {
+            inventory.setConsumed(false);
+        }
+        return inventoryRepository.saveDrug(inventory);
     }
 }
