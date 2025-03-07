@@ -15,13 +15,43 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await loginUser(username, password);
+  //     console.log("Login Successful:", response);
+  
+  //     dispatch(loginSuccess(response));
+  
+  //     // Role-based redirection
+  //     if (response.roleId === 2) {
+  //       navigate("/admin-dashboard");
+  //     } else if (response.roleId === 3) {
+  //       navigate("/hospital-dashboard");
+  //     } else {
+  //       navigate("/default-dashboard"); // Handle unknown roles
+  //     }
+  //   } catch (err) {
+  //     console.error("Login Failed:", err);
+  //     setError(err.message || "Login failed");
+  //   }
+  // };
+  
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser(username, password);
+      const response = await loginUser(username, password); // API call
       console.log("Login Successful:", response);
-  
-      dispatch(loginSuccess(response));
+      
+      // Dispatch full user data to Redux
+      dispatch(loginSuccess({
+        token: response.token,
+        username: response.username,
+        email: response.email,  // ✅ Store email
+        roleId: response.roleId,
+        hospitalDetails: response.hospitalDetails,  // ✅ Store hospital details
+      }));
   
       // Role-based redirection
       if (response.roleId === 2) {

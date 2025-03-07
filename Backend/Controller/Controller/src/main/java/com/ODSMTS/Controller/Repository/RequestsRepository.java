@@ -26,12 +26,14 @@ public class RequestsRepository {
                 df.form_name,
                 rq.quantity,
                 rq.fulfilled_by,
+                fh.name AS fulfilled_by_name,  -- Fetch the name instead of ID
                 rq.fulfilled_quantity,
                 rq.status,
                 rq.request_date
             FROM requests rq
             LEFT JOIN orphan_drugs od ON rq.drug_id = od.id
             LEFT JOIN hospitals hs ON rq.created_by = hs.id
+            LEFT JOIN hospitals fh ON rq.fulfilled_by = fh.id  -- Join fulfilled_by with hospitals
             LEFT JOIN drug_form df ON rq.drug_form_id = df.id
             ORDER BY rq.quantity DESC;
         """;
@@ -47,6 +49,7 @@ public class RequestsRepository {
                 df.form_name,
                 rq.quantity,
                 rq.fulfilled_by,
+                fh.name AS fulfilled_by_name,  -- Fetch the name instead of ID
                 rq.fulfilled_quantity,
                 rq.status,
                 rq.request_date
@@ -54,6 +57,7 @@ public class RequestsRepository {
             LEFT JOIN orphan_drugs od ON rq.drug_id = od.id
             LEFT JOIN hospitals hs ON rq.created_by = hs.id
             LEFT JOIN drug_form df ON rq.drug_form_id = df.id
+            LEFT JOIN hospitals fh ON rq.fulfilled_by = fh.id  -- Join fulfilled_by with hospitals
             WHERE rq.created_by = ?
             ORDER BY rq.quantity DESC;
         """;

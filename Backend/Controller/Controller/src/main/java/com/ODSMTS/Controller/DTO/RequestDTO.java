@@ -7,7 +7,8 @@ public class RequestDTO {
     private String drugName;
     private String formName;
     private int quantity;
-    private Long fulfilledBy;
+    private Long fulfilledBy; // ✅ Keeping ID
+    private String fulfilledByName; // ✅ Added Name
     private int fulfilledQuantity;
     private String status;
     private LocalDateTime requestDate;
@@ -25,8 +26,11 @@ public class RequestDTO {
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
-    public Long getFulfilledBy() { return fulfilledBy; }
-    public void setFulfilledBy(Long fulfilledBy) { this.fulfilledBy = fulfilledBy; }
+    public Long getFulfilledBy() { return fulfilledBy; } // ✅ Getter for ID
+    public void setFulfilledBy(Long fulfilledBy) { this.fulfilledBy = fulfilledBy; } // ✅ Setter for ID
+
+    public String getFulfilledByName() { return fulfilledByName; } // ✅ Getter for Name
+    public void setFulfilledByName(String fulfilledByName) { this.fulfilledByName = fulfilledByName; } // ✅ Setter for Name
 
     public int getFulfilledQuantity() { return fulfilledQuantity; }
     public void setFulfilledQuantity(int fulfilledQuantity) { this.fulfilledQuantity = fulfilledQuantity; }

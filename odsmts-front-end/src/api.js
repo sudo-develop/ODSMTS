@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 
 const baseURL = "http://localhost:8080/api"
 
@@ -23,7 +23,10 @@ export const apis = {
     inventory: {
       hospital:"/inventory/hospital/{id}",
       admin: "/inventory/admin/{id}",
-    }
+    },
+    requests: {
+      all: "/requests/all",
+    },
   },
 };
 
@@ -60,5 +63,23 @@ export const HospitalInventory = async (id, token) => {
     throw error.response?.data?.message || "Failed to fetch inventory data";
   }
 };
-  
+
+// ✅ Function to fetch all requests
+export const fetchAllRequests = async (token) => {
+  try {
+    console.log("Fetching requests...");  // Debugging log
+
+    const response = await apiClient.get(apis.auth.requests.all, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    console.log("API Response:", response.data); // Debugging log
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching requests:", error.response?.data || error);
+    throw error.response?.data?.message || "Failed to fetch requests data";
+  }
+};
+
+
 export { apiClient, baseURL };
