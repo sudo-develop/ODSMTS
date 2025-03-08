@@ -23,7 +23,7 @@ import userReducer from "./userSlice"; // ✅ Import user reducer
 const persistConfig = {
   key: "user",
   storage,
-  whitelist: ["token", "username", "email", "roleId", "hospitalDetails"], // Include email and hospitalDetails
+  whitelist: ["token", "username", "email", "roleId","hospitalId", "hospitalDetails"], // Include email and hospitalDetails
 };
 
 

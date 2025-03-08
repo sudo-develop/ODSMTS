@@ -50,6 +50,7 @@ const Login = () => {
         username: response.username,
         email: response.email,  // ✅ Store email
         roleId: response.roleId,
+        hospitalId: response.hospitalId,
         hospitalDetails: response.hospitalDetails,  // ✅ Store hospital details
       }));
   

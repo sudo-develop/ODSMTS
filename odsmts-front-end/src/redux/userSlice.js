@@ -1,4 +1,4 @@
-// import { createSlice } from "@reduxjs/toolkit";
+ import { createSlice } from "@reduxjs/toolkit";
 
 // const initialState = {
 //   token: null,
@@ -64,15 +64,13 @@
 // export const { loginSuccess, logout } = userSlice.actions;
 // export default userSlice.reducer;
 
-
-import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   token: null,
   username: null,
   email: null,
   roleId: null,
-  hospitalDetails: null, // ✅ Store hospital details
+  hospitalId: null, // ✅ Add hospitalId separately
+  hospitalDetails: null,
 };
 
 const userSlice = createSlice({
@@ -84,13 +82,15 @@ const userSlice = createSlice({
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.roleId = action.payload.roleId;
-      state.hospitalDetails = action.payload.hospitalDetails; // ✅ Store full hospital details
+      state.hospitalId = action.payload.hospitalId; // ✅ Store hospitalId
+      state.hospitalDetails = action.payload.hospitalDetails;
     },
     logout: (state) => {
       state.token = null;
       state.username = null;
       state.email = null;
       state.roleId = null;
+      state.hospitalId = null; // ✅ Clear hospitalId on logout
       state.hospitalDetails = null;
     },
   },
