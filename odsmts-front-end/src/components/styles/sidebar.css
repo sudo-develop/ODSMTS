@@ -1,0 +1,45 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #73C7E3; /* Light sky blue */
+  color: #161515; /* ✅ Dark grey text */
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  font-family: Arial, sans-serif; /* ✅ Apply Arial font */
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 20px;
+  font-family: Arial, sans-serif; /* ✅ Apply Arial font */
+  color: #161515; /* ✅ Dark grey text */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #161515; /* ✅ Dark grey text */
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  padding: 10px;
+  transition: 0.3s;
+  font-family: Arial, sans-serif; /* ✅ Apply Arial font */
+}
+
+.sidebar ul li a:hover {
+  background-color: #0096D1; /* Darker blue on hover */
+  border-radius: 5px;
+}

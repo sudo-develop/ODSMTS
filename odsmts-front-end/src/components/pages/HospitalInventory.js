@@ -1,5 +1,5 @@
 import Sidebar from "../sidebar/sidebar";
-import RequestTable from "../tables/request-table";
+import HospitalInventoryTableTable from "../tables/hospital-inventory-table";
 import Header from "../pages/Header/header"; // ✅ Import Header
 
 const HospitalDashboard = () => {
@@ -7,10 +7,9 @@ const HospitalDashboard = () => {
     <div className="dashboard-container">
       <Sidebar />
       <div className="content">
-        <Header />  {/* ✅ Display hospital info */}
-        {/* <h1>Hospital Dashboard</h1> */}
+      <Header />  {/* ✅ Display hospital info */}
         <br />
-        <RequestTable />
+      <HospitalInventoryTableTable />
       </div>
     </div>
   );

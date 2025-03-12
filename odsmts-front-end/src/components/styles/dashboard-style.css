@@ -1,5 +1,5 @@
 /* dashboard-style.css */
-.dashboard-container {
+ .dashboard-container {
     margin-left: 270px; /* To avoid overlapping with sidebar */
     padding: 20px;
   }

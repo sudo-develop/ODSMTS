@@ -5,7 +5,7 @@ import { loginUser } from "../../api";  // Corrected path
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import "../styles/login-style.css";  // Corrected path
-import loginImage from "../../assets/login-image.png";  // Corrected path
+import loginImage from "../../assets/logo-image.png";  // Corrected path
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,13 +15,44 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await loginUser(username, password);
+  //     console.log("Login Successful:", response);
+  
+  //     dispatch(loginSuccess(response));
+  
+  //     // Role-based redirection
+  //     if (response.roleId === 2) {
+  //       navigate("/admin-dashboard");
+  //     } else if (response.roleId === 3) {
+  //       navigate("/hospital-dashboard");
+  //     } else {
+  //       navigate("/default-dashboard"); // Handle unknown roles
+  //     }
+  //   } catch (err) {
+  //     console.error("Login Failed:", err);
+  //     setError(err.message || "Login failed");
+  //   }
+  // };
+  
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser(username, password);
+      const response = await loginUser(username, password); // API call
       console.log("Login Successful:", response);
-  
-      dispatch(loginSuccess(response));
+      
+      // Dispatch full user data to Redux
+      dispatch(loginSuccess({
+        token: response.token,
+        username: response.username,
+        email: response.email,  // ✅ Store email
+        roleId: response.roleId,
+        hospitalId: response.hospitalId,
+        hospitalDetails: response.hospitalDetails,  // ✅ Store hospital details
+      }));
   
       // Role-based redirection
       if (response.roleId === 2) {
@@ -52,11 +83,6 @@ const Login = () => {
           </div>
           <div className="input-group password-container">
             <label>Password</label>
-            <input 
-              type={showPassword ? "text" : "password"} 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-            />
             <button 
               type="button" 
               className="eye-button"
@@ -64,8 +90,20 @@ const Login = () => {
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
+            <input 
+              type={showPassword ? "text" : "password"} 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            />
+            {/* <button 
+              type="button" 
+              className="eye-button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button> */}
           </div>
-          <button type="submit">Login</button>
+          <button className="login-button" type="submit">Login</button>
         </form>
         {error && <p className="error-text">{error}</p>}
       </div>
