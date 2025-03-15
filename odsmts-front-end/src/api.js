@@ -22,7 +22,7 @@ export const apis = {
     createUser: "/create",
     inventory: {
       hospital:"/inventory/hospital/{id}",
-      admin: "/inventory/admin/{id}",
+      addDrug: "/inventory/addDrug",
     },
     requests: {
       all: "/requests/all",
@@ -61,6 +61,20 @@ export const HospitalInventory = async (id, token) => {
   } catch (error) {
     console.error("Error:", error.response?.data || error);
     throw error.response?.data?.message || "Failed to fetch inventory data";
+  }
+};
+
+export const addDrugInventory = async (payload, token) => {
+  try {
+    const response = await apiClient.post(apis.auth.inventory.addDrug, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    console.log("Inventory Added:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Add Inventory Error:", error.response?.data || error);
+    throw error.response?.data?.message || "Failed to add inventory";
   }
 };
 

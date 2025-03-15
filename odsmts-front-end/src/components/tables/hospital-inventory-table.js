@@ -29,9 +29,9 @@ const HospitalInventoryTable = () => {
   return (
     <div className="overflow-x-auto">
       <div className="createInventroy">
-        <button className="createInventroybtn" onClick={() => navigate("/hospital-reports")}>
-          Create
-        </button>
+      <button className="createInventroybtn" onClick={() => navigate("/add-inventory")}>
+        Create
+      </button>
       </div>
       <br/>
       <table className="min-w-full border-collapse border border-gray-300">

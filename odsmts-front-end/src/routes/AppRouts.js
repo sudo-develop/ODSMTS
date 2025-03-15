@@ -7,6 +7,7 @@ import HospitalDashboard from "../components/pages/HospitalDashboard";
 import HospitalInventory from "../components/pages/HospitalInventory";
 import HospitalReport from "../components/pages/Hospitalreport"
 import PrivateRoute from "./PrivateRouts";
+import AddInventoryForm from "../components/pages/create form/AddInventoryForm"
 
 const AppRoutes = () => {
   const roleId = useSelector((state) => state.user.roleId);
@@ -40,6 +41,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+       <Route path="/add-inventory" element={<AddInventoryForm />} />
        <Route
         path="/hospital-reports"
         element={

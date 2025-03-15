@@ -30,12 +30,14 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
+    font-family: Arial, sans-serif;
 }
 
 .error-text {
-    color: red;
+    color: #0096D1;  /* Changed from red to dark blue */
     font-size: 14px;
     margin-bottom: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .input-group {
@@ -44,12 +46,14 @@
     text-align: left;
     margin-bottom: 15px;
     width: 100%;
+    font-family: Arial, sans-serif;
 }
 
 .input-group label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #555;
+    font-family: Arial, sans-serif;
 }
 
 /* Align input fields properly */
@@ -62,17 +66,17 @@
     outline: none;
     transition: 0.3s;
     box-sizing: border-box; /* Ensure proper width calculation */
+    font-family: Arial, sans-serif;
 }
 
 .input-group input:focus {
-    border: 1px solid #ff0000;
+    border: 1px solid #0096D1;  /* Changed from red to dark blue */
 }
 
 /* Align Password Field Properly */
 .password-container {
     position: relative;
     display: flex;
-    /* align-items: center; */
     width: 100%;
     justify-content: space-between; 
 }
@@ -95,17 +99,15 @@
     align-items: center;
 }
 
-
 /* Login button styling */
-
 .login-button {
     width: 100%;
     padding: 12px;
-    background: #ff3131;
-    color: white;
+    background: #73C7E3;
+    color: #555;
     border: none;
     border-radius: 8px;
-    font: 1em times-new-roman;
+    font-family: Arial, sans-serif;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
@@ -117,10 +119,10 @@
 }
 
 .login-button:hover {
+    background: #0096D1;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Image container for right-side image */
 .image-container {
