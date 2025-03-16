@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../sidebar/sidebar";
 import Header from "../Header/header";
-import "../../styles/inventoryForm-style.css";
+import "../../styles/inventoryForm-style.css"; // Ensure CSS is updated
 import { addDrugInventory } from "../../../api";
+import { FaCaretDown, FaCalendarAlt } from "react-icons/fa"; // Import icons
 
 const drugOptions = [
   { id: 1, name: "Keytruda" },
@@ -33,10 +34,30 @@ const AddInventoryForm = () => {
     drugFormId: "",
     expiryDate: "",
   });
-const token = useSelector((state) => state.user.token);
+  const token = useSelector((state) => state.user.token);
+
+  // List of drug IDs that should be restricted to "Tablet" only
+  const tabletOnlyDrugs = [6, 7, 8, 9];
+
+  // Determine available drug forms based on selected drug
+  const filteredDrugForms = tabletOnlyDrugs.includes(parseInt(formData.drugId))
+    ? drugFormOptions.filter((form) => form.id === 2) // Only allow "Tablet"
+    : drugFormOptions;
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // If drug is changed, reset the drugFormId if it's invalid
+    if (name === "drugId") {
+      const newDrugId = parseInt(value);
+      setFormData({
+        ...formData,
+        drugId: newDrugId,
+        drugFormId: tabletOnlyDrugs.includes(newDrugId) ? 2 : "", // Auto-set Tablet or reset
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -50,7 +71,7 @@ const token = useSelector((state) => state.user.token);
       isExpired: false,
       isConsumed: false,
     };
-    
+
     try {
       await addDrugInventory(payload, token);
       alert("Inventory added successfully!");
@@ -59,7 +80,7 @@ const token = useSelector((state) => state.user.token);
       console.error("Error adding inventory:", error);
       alert("Failed to add inventory");
     }
-  }
+  };
 
   return (
     <div className="dashboard-container">
@@ -69,25 +90,44 @@ const token = useSelector((state) => state.user.token);
         <div className="form-container">
           <h2>Add Inventory</h2>
           <form onSubmit={handleSubmit}>
-            <label>Drug Name:</label>
-            <select name="drugId" value={formData.drugId} onChange={handleChange} required>
-              <option value="">Select Drug</option>
-              {drugOptions.map((drug) => (
-                <option key={drug.id} value={drug.id}>{drug.name}</option>
-              ))}
-            </select>
+            {/* Drug Name Selection */}
+            <div className="input-group">
+              <label>Drug Name:</label>
+              <div className="custom-select">
+                <select name="drugId" value={formData.drugId} onChange={handleChange} required>
+                  <option value="">Select Drug</option>
+                  {drugOptions.map((drug) => (
+                    <option key={drug.id} value={drug.id}>{drug.name}</option>
+                  ))}
+                </select>
+                <FaCaretDown className="icon" />
+              </div>
+            </div>
 
-            <label>Drug Form:</label>
-            <select name="drugFormId" value={formData.drugFormId} onChange={handleChange} required>
-              <option value="">Select Form</option>
-              {drugFormOptions.map((form) => (
-                <option key={form.id} value={form.id}>{form.name}</option>
-              ))}
-            </select>
+            {/* Drug Form Selection (Filters dynamically) */}
+            <div className="input-group">
+              <label>Drug Form:</label>
+              <div className="custom-select">
+                <select name="drugFormId" value={formData.drugFormId} onChange={handleChange} required>
+                  <option value="">Select Form</option>
+                  {filteredDrugForms.map((form) => (
+                    <option key={form.id} value={form.id}>{form.name}</option>
+                  ))}
+                </select>
+                <FaCaretDown className="icon" />
+              </div>
+            </div>
 
-            <label>Expiry Date:</label>
-            <input type="date" name="expiryDate" value={formData.expiryDate} onChange={handleChange} required />
-            
+            {/* Expiry Date Selection */}
+            <div className="input-group">
+              <label>Expiry Date:</label>
+              <div className="custom-input">
+                <input type="date" name="expiryDate" value={formData.expiryDate} onChange={handleChange} required />
+                <FaCalendarAlt className="icon" />
+              </div>
+            </div>
+
+            {/* Buttons */}
             <div className="button-group">
               <button type="submit" className="submit-btn">Add Inventory</button>
               <button type="button" className="back-btn" onClick={() => navigate("/hospital-inventory")}>Back</button>
