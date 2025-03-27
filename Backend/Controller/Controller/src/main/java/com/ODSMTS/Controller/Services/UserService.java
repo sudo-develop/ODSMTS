@@ -3,6 +3,9 @@ package com.ODSMTS.Controller.Services;
 import com.ODSMTS.Controller.DTO.CreateUserRequest;
 import com.ODSMTS.Controller.Entity.User;
 import com.ODSMTS.Controller.Repository.UserRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,5 +46,10 @@ public class UserService {
         } catch (DataIntegrityViolationException e) {
             throw new RuntimeException("Error saving user. Please try again.");
         }
+    }
+
+     // ✅ Fetch multiple emails for a given hospital ID
+     public List<String> getUserEmailsByHospital(Long hospitalId) {
+        return userRepository.findEmailsByHospitalId(hospitalId);
     }
 }

@@ -21,6 +21,8 @@ public class RequestsRepository {
     public List<RequestDTO> getAllRequests() {
         String sql = """
             SELECT 
+                rq.id AS id,
+                rq.created_by AS created_by,
                 hs.name AS hospital_name,
                 od.drug_name,
                 df.form_name,
@@ -44,6 +46,8 @@ public class RequestsRepository {
     public List<RequestDTO> getRequestsByHospital(Long hospitalId) {
         String sql = """
             SELECT 
+                rq.id AS id,
+                rq.created_by AS created_by,
                 hs.name AS hospital_name,
                 od.drug_name,
                 df.form_name,
@@ -65,6 +69,32 @@ public class RequestsRepository {
         return jdbcTemplate.query(sql, new RequestDetailsRowMapper(), hospitalId);
     }
     
+    public List<RequestDTO> getRequestByRequestId(Long requestId) {
+        String sql = """
+            SELECT 
+                rq.id AS id,
+                rq.created_by AS created_by,
+                hs.name AS hospital_name,
+                od.drug_name,
+                df.form_name,
+                rq.quantity,
+                rq.fulfilled_by,
+                fh.name AS fulfilled_by_name,
+                rq.fulfilled_quantity,
+                rq.status,
+                rq.request_date
+            FROM requests rq
+            LEFT JOIN orphan_drugs od ON rq.drug_id = od.id
+            LEFT JOIN hospitals hs ON rq.created_by = hs.id
+            LEFT JOIN drug_form df ON rq.drug_form_id = df.id
+            LEFT JOIN hospitals fh ON rq.fulfilled_by = fh.id
+            WHERE rq.id = ?;
+        """;
+    
+        return  jdbcTemplate.query(sql, new RequestDetailsRowMapper(), requestId);
+    }
+    
+
     public int createRequest(RequestCreateDTO request) {
     String sql = """
         INSERT INTO requests (drug_id, drug_form_id, created_by, fulfilled_by, quantity, fulfilled_quantity, request_date, status)

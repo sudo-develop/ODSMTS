@@ -3,17 +3,22 @@ package com.ODSMTS.Controller.DTO;
 import java.time.LocalDateTime;
 
 public class RequestDTO {
+    private Long id;
     private String hospitalName;
     private String drugName;
     private String formName;
     private int quantity;
-    private Long fulfilledBy; // ✅ Keeping ID
+    private Long fulfilledBy; 
+    private Long createdBy; 
     private String fulfilledByName; // ✅ Added Name
     private int fulfilledQuantity;
     private String status;
     private LocalDateTime requestDate;
 
     // Getters and Setters
+    public Long getRequestId() { return id; }
+    public void setRequestId(Long id) { this.id = id; }
+
     public String getHospitalName() { return hospitalName; }
     public void setHospitalName(String hospitalName) { this.hospitalName = hospitalName; }
 
@@ -28,6 +33,9 @@ public class RequestDTO {
 
     public Long getFulfilledBy() { return fulfilledBy; } // ✅ Getter for ID
     public void setFulfilledBy(Long fulfilledBy) { this.fulfilledBy = fulfilledBy; } // ✅ Setter for ID
+
+    public Long getcreatedBy() { return createdBy; } // ✅ Getter for ID
+    public void setcreatedBy(Long createdBy) { this.createdBy = createdBy; } // ✅ Setter for ID
 
     public String getFulfilledByName() { return fulfilledByName; } // ✅ Getter for Name
     public void setFulfilledByName(String fulfilledByName) { this.fulfilledByName = fulfilledByName; } // ✅ Setter for Name

@@ -50,6 +50,7 @@ import org.springframework.web.bind.annotation.*;
 
 //import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -102,6 +103,15 @@ public class UserController {
             response.put("error", "An unexpected error occurred. Please try again.");
             return ResponseEntity.internalServerError().body(response);
         }
+    }
+
+    // ✅ Fetch multiple user emails for a given hospital ID
+    @GetMapping("/emails/{hospitalId}")
+    public ResponseEntity<List<String>> getUserEmailsByHospital(@PathVariable Long hospitalId) {
+        List<String> emails = userService.getUserEmailsByHospital(hospitalId);
+        
+        // ✅ Ensure an empty list is returned instead of null
+        return ResponseEntity.ok(emails != null ? emails : List.of());
     }
 
 }
