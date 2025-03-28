@@ -203,3 +203,79 @@
   .email-item input[disabled] {
     cursor: not-allowed;
   }
+
+  /* Button container styling */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.send-section {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Cancel Button */
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #bb2d3b;
+}
+
+/* Fulfill Button */
+.fulfill-button {
+  background-color: #4ec580; /* Soft light green */
+  color: #ffffff; /* Dark green text for better contrast */
+  padding: 12px 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.fulfill-button:hover:not(:disabled) {
+  background-color: #30b66c; /* Deep green on hover */
+  color: #ffffff;
+}
+
+/* Disabled state for all buttons */
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.popup-success {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4ec580;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

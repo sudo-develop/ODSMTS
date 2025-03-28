@@ -28,4 +28,11 @@ public class InventoryService {
         }
         return inventoryRepository.saveDrug(inventory);
     }
+
+    public Integer getAvailableDrugCount(Long drugId, Long drugFormId, Long hospitalId) {
+        if (drugId == null || drugFormId == null || hospitalId == null) {
+            throw new IllegalArgumentException("All parameters are required");
+        }
+        return inventoryRepository.getAvailableDrugCount(drugId, drugFormId, hospitalId);
+    }
 }

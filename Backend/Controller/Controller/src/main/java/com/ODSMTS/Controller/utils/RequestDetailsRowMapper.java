@@ -10,6 +10,8 @@ public class RequestDetailsRowMapper implements RowMapper<RequestDTO> {
     public RequestDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
         RequestDTO request = new RequestDTO();
         request.setRequestId(rs.getLong("id"));
+        request.setDrugId(rs.getLong("drug_id"));
+        request.setDrugFormId(rs.getLong("drug_form_id"));
         request.setcreatedBy(rs.getLong("created_by"));
         request.setHospitalName(rs.getString("hospital_name"));
         request.setDrugName(rs.getString("drug_name"));

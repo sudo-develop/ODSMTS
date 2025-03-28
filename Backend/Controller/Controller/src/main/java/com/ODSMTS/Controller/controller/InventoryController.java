@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ODSMTS.Controller.DTO.InventoryDetailsDTO;
@@ -52,5 +53,17 @@ public class InventoryController {
             response.put("message", "Failed to add inventory");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    @GetMapping("/available-drug-count")
+    public ResponseEntity<Map<String, Integer>> getAvailableDrugCount(
+            @RequestParam Long drugId,
+            @RequestParam Long drugFormId,
+            @RequestParam Long hospitalId) {
+
+        Integer count = inventoryService.getAvailableDrugCount(drugId, drugFormId, hospitalId);
+        Map<String, Integer> response = new HashMap<>();
+        response.put("availableCount", count);
+        return ResponseEntity.ok(response);
     }
 }

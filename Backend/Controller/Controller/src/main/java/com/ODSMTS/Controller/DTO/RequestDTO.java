@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class RequestDTO {
     private Long id;
+    private Long DrugId;
+    private Long DrugFromId;
     private String hospitalName;
     private String drugName;
     private String formName;
@@ -18,6 +20,12 @@ public class RequestDTO {
     // Getters and Setters
     public Long getRequestId() { return id; }
     public void setRequestId(Long id) { this.id = id; }
+
+    public Long getDrugId() { return DrugId; }
+    public void setDrugId(Long DrugId) { this.DrugId = DrugId; }
+
+    public Long getDrugFormId() { return DrugFromId; }
+    public void setDrugFormId(Long DrugFromId) { this.DrugFromId = DrugFromId; }
 
     public String getHospitalName() { return hospitalName; }
     public void setHospitalName(String hospitalName) { this.hospitalName = hospitalName; }

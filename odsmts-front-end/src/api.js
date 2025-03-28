@@ -23,11 +23,13 @@ export const apis = {
     inventory: {
       hospital: "/inventory/hospital/{id}",
       addDrug: "/inventory/addDrug",
+      availableDrugCount: "/inventory/available-drug-count",
     },
     requests: {
       all: "/requests/all",
       byRequestId: "/requests/request/{requestId}",  // New API for fetching request by ID
       byHospitalId: "/requests/hospital/{hospitalId}", // New API for fetching requests by hospital ID
+      fulfillRequest: "/requests/fulfill",
     },
     users: {
       emails: "/users/emails/{hospitalId}", // ✅ New API for fetching emails
@@ -183,5 +185,53 @@ export const fetchUserEmailsByHospital = async (hospitalId, token) => {
     });
 
     throw new Error(errorMessage);
+  }
+};
+
+export const getAvailableDrugCount = async (drugId, drugFormId, hospitalId, token) => {
+  try {
+    const response = await apiClient.get(apis.auth.inventory.availableDrugCount, {
+      params: {
+        drugId,
+        drugFormId,
+        hospitalId
+      },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log("Available Drug Count Response:", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching available drug count:", error.response?.data || error);
+    throw error.response?.data?.message || "Failed to fetch available drug count";
+  }
+};
+
+
+// ✅ Fulfill a request
+export const fulfillRequest = async (payload, token) => {
+  try {
+    // Make sure fulfilledQuantity is a number
+    const formattedPayload = {
+      requestId: payload.requestId,
+      fromHospitalId: payload.fromHospitalId,
+      toHospitalId: payload.toHospitalId,
+      fulfilledQuantity: Number(payload.fulfilledQuantity),
+    };
+
+    const response = await apiClient.post(apis.auth.requests.fulfillRequest, formattedPayload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log("Fulfill Request Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fulfilling request:", error.response?.data || error);
+    throw error.response?.data?.message || "Failed to fulfill request";
   }
 };

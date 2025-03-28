@@ -9,6 +9,7 @@ import HospitalReport from "../components/pages/Hospitalreport";
 import PrivateRoute from "./PrivateRouts";
 import AddInventoryForm from "../components/pages/create form/AddInventoryForm";
 import ConnectHospitalLayout from "../components/pages/ConnectHospitalLayout"; // Add this import
+import FulfillRequestLayout from "../components/pages/FulfillRequestLayout";
 
 const AppRoutes = () => {
   const roleId = useSelector((state) => state.user.roleId);
@@ -45,7 +46,15 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
-      
+      {/* Other protected routes */}
+      <Route
+        path="/fulfill/request/:requestId"
+        element={
+          <PrivateRoute>
+            <FulfillRequestLayout />
+          </PrivateRoute>
+        }
+      /> 
       <Route
         path="/hospital-inventory"
         element={

@@ -137,7 +137,7 @@ const RequestTable = () => {
                   <button
                     onClick={() => handleConnect(item)}
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 disabled:bg-gray-400"
-                    disabled={item.status !== "APPROVED"}
+                    disabled={item.status !== "APPROVED" && item.status !== "PENDING"}
                   >
                     Connect
                   </button>

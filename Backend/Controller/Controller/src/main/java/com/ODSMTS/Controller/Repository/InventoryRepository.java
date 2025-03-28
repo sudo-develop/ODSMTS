@@ -137,9 +137,10 @@ public class InventoryRepository {
     }
     
 
-    public int getAvailableDrugCount(Long drugId, Long drugFormId, Long hospitalId) {
+    public Integer getAvailableDrugCount(Long drugId, Long drugFormId, Long hospitalId) {
         String sql = """
-            SELECT COUNT(*) FROM inventory 
+            SELECT COUNT(*) AS avaliable_count
+            FROM inventory 
             WHERE is_consumed = false AND is_expired = false 
             AND drug_id = ? AND drug_form_id = ? 
             AND current_hospital_id = ?
