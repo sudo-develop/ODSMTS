@@ -14,11 +14,18 @@ import storage from "redux-persist/lib/storage"; // Uses localStorage
 import { persistReducer, persistStore } from "redux-persist";
 import userReducer from "./userSlice"; // ✅ Import user reducer
 
+// const persistConfig = {
+//   key: "user",
+//   storage,
+//   whitelist: ["token", "username", "roleId"], // ✅ Persist only necessary data
+// };
+
 const persistConfig = {
   key: "user",
   storage,
-  whitelist: ["token", "username", "roleId"], // ✅ Persist only necessary data
+  whitelist: ["token", "username", "email", "roleId","hospitalId", "hospitalDetails"], // Include email and hospitalDetails
 };
+
 
 const persistedUserReducer = persistReducer(persistConfig, userReducer);
 

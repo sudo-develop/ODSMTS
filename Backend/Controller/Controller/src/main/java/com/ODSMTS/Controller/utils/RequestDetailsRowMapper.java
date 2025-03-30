@@ -4,7 +4,6 @@ import com.ODSMTS.Controller.DTO.RequestDTO;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class RequestDetailsRowMapper implements RowMapper<RequestDTO> {
     @Override
@@ -14,7 +13,8 @@ public class RequestDetailsRowMapper implements RowMapper<RequestDTO> {
         request.setDrugName(rs.getString("drug_name"));
         request.setFormName(rs.getString("form_name"));
         request.setQuantity(rs.getInt("quantity"));
-        request.setFulfilledBy(rs.getLong("fulfilled_by"));
+        request.setFulfilledBy(rs.getLong("fulfilled_by")); // ✅ Keeps the ID
+        request.setFulfilledByName(rs.getString("fulfilled_by_name")); // ✅ Adds the name
         request.setFulfilledQuantity(rs.getInt("fulfilled_quantity"));
         request.setStatus(rs.getString("status"));
 

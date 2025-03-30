@@ -114,4 +114,38 @@ public class InventoryRepository {
         return jdbcTemplate.query(sql, detailsRowMapper, hospitalId);
     }
 
+    public int updateInventory(Long drugId, Long drugFormId, Long fromHospitalId, Long toHospitalId, int quantity) {
+        String sql = """
+            UPDATE inventory i
+            JOIN (
+                SELECT id
+                FROM inventory
+                WHERE is_consumed = false AND is_expired = false
+                AND drug_id = ? AND drug_form_id = ?
+                AND current_hospital_id = ?
+                ORDER BY id
+                LIMIT ?
+            ) subquery ON i.id = subquery.id
+            SET i.current_hospital_id = ?
+        """;
+    
+        int rowsUpdated = jdbcTemplate.update(sql, drugId, drugFormId, fromHospitalId, quantity, toHospitalId);
+    
+        System.out.println("Rows updated in inventory: " + rowsUpdated); // Debugging log
+    
+        return rowsUpdated;
+    }
+    
+
+    public int getAvailableDrugCount(Long drugId, Long drugFormId, Long hospitalId) {
+        String sql = """
+            SELECT COUNT(*) FROM inventory 
+            WHERE is_consumed = false AND is_expired = false 
+            AND drug_id = ? AND drug_form_id = ? 
+            AND current_hospital_id = ?
+        """;
+        return jdbcTemplate.queryForObject(sql, Integer.class, drugId, drugFormId, hospitalId);
+    }
+    
+    
 }

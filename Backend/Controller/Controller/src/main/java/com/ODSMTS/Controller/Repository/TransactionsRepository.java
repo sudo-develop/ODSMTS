@@ -24,4 +24,13 @@ public class TransactionsRepository {
         String sql = "SELECT * FROM transactions WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new TransactionsRowMapper(), id);
     }
+
+        // Repository (TransactionsRepository.java)
+    public int insertTransaction(Long fromHospitalId, Long toHospitalId, Long requestId, int givenCount) {
+        String sql = """
+            INSERT INTO transactions (from_hospital_id, to_hospital_id, request_id, given_count) 
+            VALUES (?, ?, ?, ?)
+        """;
+        return jdbcTemplate.update(sql, fromHospitalId, toHospitalId, requestId, givenCount);
+    }
 }

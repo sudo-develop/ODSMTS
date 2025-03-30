@@ -7,27 +7,31 @@ import { useNavigate } from "react-router-dom";
 const HospitalInventoryTable = () => {
   const [data, setData] = useState([]); 
   const token = useSelector((state) => state.user.token);
+  const hospitalId = useSelector((state) => state.user.hospitalId); // Get hospital ID from Redux
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await HospitalInventory(3, token);
-        setData(result);
+        console.log("hospitalid",hospitalId);
+        if (hospitalId) {  // Ensure hospitalId is available
+          const result = await HospitalInventory(hospitalId, token);
+          setData(result);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
-  }, [token]); 
+  }, [hospitalId, token]);  // Fetch data when hospitalId or token changes
 
   const navigate = useNavigate();
 
   return (
     <div className="overflow-x-auto">
       <div className="createInventroy">
-      <button className="createInventroybtn" onClick={() => navigate("/hospital-reports")}>
-            Create
-      </button>
+        <button className="createInventroybtn" onClick={() => navigate("/hospital-reports")}>
+          Create
+        </button>
       </div>
       <br/>
       <table className="min-w-full border-collapse border border-gray-300">
