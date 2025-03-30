@@ -34,6 +34,10 @@ public class RequestService {
         return requestsRepository.getRequestsByHospital(hospitalId);
     }
 
+    public List<RequestDTO> getRequestByRequestId(Long requestId) {
+        return requestsRepository.getRequestByRequestId(requestId);
+    }
+
     public String createRequest(RequestCreateDTO requestDTO) {
         int rowsAffected = requestsRepository.createRequest(requestDTO);
         return rowsAffected > 0 ? "Request created successfully!" : "Failed to create request.";

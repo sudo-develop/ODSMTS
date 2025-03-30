@@ -28,6 +28,12 @@ public class RequestsController {
     public List<RequestDTO> getRequestsByHospital(@PathVariable Long hospitalId) {
         return requestService.getRequestsByHospital(hospitalId);
     }
+
+    @GetMapping("/request/{requestId}")
+    public List<RequestDTO> getRequestByRequestId(@PathVariable Long requestId) {
+        return requestService.getRequestByRequestId(requestId);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> createRequest(@RequestBody RequestCreateDTO requestDTO) {
         String message = requestService.createRequest(requestDTO);

@@ -5,17 +5,19 @@ import Login from "../components/pages/login";
 import AdminDashboard from "../components/pages/AdminDashboard";
 import HospitalDashboard from "../components/pages/HospitalDashboard";
 import HospitalInventory from "../components/pages/HospitalInventory";
-import HospitalReport from "../components/pages/Hospitalreport"
+import HospitalReport from "../components/pages/Hospitalreport";
 import PrivateRoute from "./PrivateRouts";
+import AddInventoryForm from "../components/pages/create form/AddInventoryForm";
+import ConnectHospitalLayout from "../components/pages/ConnectHospitalLayout"; // Add this import
 
 const AppRoutes = () => {
   const roleId = useSelector((state) => state.user.roleId);
 
   return (
     <Routes>
-     {/* Redirect root ("/") to "/login" automatically */}
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+      
       <Route
         path="/admin-dashboard"
         element={
@@ -24,6 +26,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+      
       <Route
         path="/hospital-dashboard"
         element={
@@ -32,6 +35,17 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+      
+      {/* Add the new connect hospital route */}
+      <Route
+        path="/connect/hospital"
+        element={
+          <PrivateRoute>
+            <ConnectHospitalLayout />
+          </PrivateRoute>
+        }
+      />
+      
       <Route
         path="/hospital-inventory"
         element={
@@ -40,7 +54,17 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
-       <Route
+      
+      <Route
+        path="/add-inventory"
+        element={
+          <PrivateRoute>
+            <AddInventoryForm />
+          </PrivateRoute>
+        }
+      />
+      
+      <Route
         path="/hospital-reports"
         element={
           <PrivateRoute>
