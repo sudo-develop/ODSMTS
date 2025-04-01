@@ -9,6 +9,8 @@ import HospitalReport from "../components/pages/Hospitalreport";
 import PrivateRoute from "./PrivateRouts";
 import AddInventoryForm from "../components/pages/create form/AddInventoryForm";
 import ConnectHospitalLayout from "../components/pages/ConnectHospitalLayout"; // Add this import
+import HospitalRequests from "../components/pages/HospitalRequests";
+import AddRequestForm from "../components/pages/create form/AddRequestForm";
 
 const AppRoutes = () => {
   const roleId = useSelector((state) => state.user.roleId);
@@ -63,12 +65,30 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/add-request"
+        element={
+          <PrivateRoute>
+            <AddRequestForm />
+          </PrivateRoute>
+        }
+      />
       
       <Route
         path="/hospital-reports"
         element={
           <PrivateRoute>
             <HospitalReport />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/hospital-requests"
+        element={
+          <PrivateRoute>
+            <HospitalRequests />
           </PrivateRoute>
         }
       />

@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../styles/table.css";
-import { fetchAllRequests } from "../../api";
+import { fetchRequestsByHospital } from "../../api";
 
-const RequestTable = () => {
+const RequestByIdTable = () => {
   const [data, setData] = useState([]);
   const token = useSelector((state) => state.user.token);
+  const hospitalId = useSelector((state) => state.user.hospitalId);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const result = await fetchAllRequests(token);
+        const result = await fetchRequestsByHospital(hospitalId,token);
         setData(result);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -35,6 +36,12 @@ const RequestTable = () => {
 
   return (
     <div className="overflow-x-auto">
+      <div className="createInventroy">
+      <button className="createInventroybtn" onClick={() => navigate("/add-request")}>
+        Create
+      </button>
+      </div>
+      <br/>
       <table className="min-w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
@@ -46,7 +53,7 @@ const RequestTable = () => {
             <th className="border p-2">FULFILLED QTY</th>
             <th className="border p-2">STATUS</th>
             <th className="border p-2">REQUEST DATE</th>
-            <th className="border p-2">ACTION</th>
+            {/* <th className="border p-2">ACTION</th> */}
           </tr>
         </thead>
         <tbody>
@@ -63,7 +70,7 @@ const RequestTable = () => {
                 <td className="border p-2">
                   {new Date(item.requestDate).toLocaleDateString()}
                 </td>
-                <td className="border p-2">
+                {/* <td className="border p-2">
                   <button
                     onClick={() => handleConnect(item)}
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 disabled:bg-gray-400"
@@ -71,7 +78,7 @@ const RequestTable = () => {
                   >
                     Connect
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))
           ) : (
@@ -87,4 +94,4 @@ const RequestTable = () => {
   );
 };
 
-export default RequestTable;
+export default RequestByIdTable;
