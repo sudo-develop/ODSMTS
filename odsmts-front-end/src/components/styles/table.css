@@ -117,3 +117,26 @@ tfoot {
   background-color: #0096D1;
   transform: scale(1.05);
 }
+
+.connect-button button {
+  background-color: #0096D1;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.connect-button button:hover {
+  background-color: #0078a0;
+  transform: scale(1.05);
+}
+
+.connect-button button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+  transform: none;
+}
