@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../styles/table.css";
-import { fetchAllRequests } from "../../api";
+import { fetchRequestsByHospital } from "../../api";
 
-const RequestTable = () => {
+const RequestByIdTable = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true); // State for loading
   const token = useSelector((state) => state.user.token);
   const hospitalId = useSelector((state) => state.user.hospitalId);
   const navigate = useNavigate();
@@ -14,13 +13,10 @@ const RequestTable = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        setLoading(true); // Start loading
-        const result = await fetchAllRequests(token);
+        const result = await fetchRequestsByHospital(hospitalId,token);
         setData(result);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Stop loading
       }
     };
     token && getData();
@@ -30,7 +26,7 @@ const RequestTable = () => {
     navigate(`/connect/hospital`, {
       state: {
         requestId: request.requestId,
-        createdBy: request.createdBy,
+        createdBy: request.createdBy, // Add this
         hospitalName: request.hospitalName,
         drugName: request.drugName,
         quantity: request.quantity
@@ -40,6 +36,12 @@ const RequestTable = () => {
 
   return (
     <div className="overflow-x-auto">
+      <div className="createInventroy">
+      <button className="createInventroybtn" onClick={() => navigate("/add-request")}>
+        Create
+      </button>
+      </div>
+      <br/>
       <table className="min-w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
@@ -51,19 +53,11 @@ const RequestTable = () => {
             <th className="border p-2">FULFILLED QTY</th>
             <th className="border p-2">STATUS</th>
             <th className="border p-2">REQUEST DATE</th>
-            <th className="border p-2">ACTION</th>
+            {/* <th className="border p-2">ACTION</th> */}
           </tr>
         </thead>
         <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan="9" className="text-center p-4">
-                <div className="flex justify-center">
-                  <div className="w-8 h-8 border-4 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              </td>
-            </tr>
-          ) : data.length > 0 ? (
+          {data.length > 0 ? (
             data.map((item) => (
               <tr key={item.requestId} className="border">
                 <td className="border p-2">{item.hospitalName}</td>
@@ -76,23 +70,22 @@ const RequestTable = () => {
                 <td className="border p-2">
                   {new Date(item.requestDate).toLocaleDateString()}
                 </td>
-                <td className="connect-button">
+                {/* <td className="border p-2">
                   <button
                     onClick={() => handleConnect(item)}
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 disabled:bg-gray-400"
-                    disabled={
-                      (item.status !== "APPROVED" && item.status !== "PENDING") || 
-                      item.createdBy === hospitalId
-                    }
+                    disabled={item.status !== "APPROVED"}
                   >
                     Connect
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="9" className="text-center p-2">No data available</td>
+              <td colSpan="9" className="text-center p-2">
+                Loading data...
+              </td>
             </tr>
           )}
         </tbody>
@@ -101,4 +94,4 @@ const RequestTable = () => {
   );
 };
 
-export default RequestTable;
+export default RequestByIdTable;
