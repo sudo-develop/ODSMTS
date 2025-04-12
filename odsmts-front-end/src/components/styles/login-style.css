@@ -146,3 +146,35 @@
         width: 300px;
     }
 }
+
+.demoDetails {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background-color: #f3f4f6; /* Light gray background */
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    color: #374151; /* Gray-700 */
+    max-width: 250px;
+    line-height: 1.6;
+    z-index: 999; /* Keep it on top */
+  }
+  
+  .demoDetails::before {
+    content: "Demo Credentials";
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #111827; /* Gray-900 */
+    border-bottom: 1px solid #d1d5db; /* Subtle divider */
+    padding-bottom: 0.25rem;
+  }
+  
+  .demoDetails div {
+    margin-bottom: 0.25rem;
+  }
+  

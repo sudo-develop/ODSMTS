@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../redux/userSlice"; // Adjusted path
-import { loginUser } from "../../api";  // Corrected path
+import { loginSuccess } from "../../redux/userSlice"; 
+import { loginUser } from "../../api";  
 import { useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
-import "../styles/login-style.css";  // Corrected path
-import loginImage from "../../assets/logo-image.png";  // Corrected path
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import "../styles/login-style.css";  
+import loginImage from "../../assets/logo-image.png";  
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -112,6 +112,10 @@ const Login = () => {
       <div className="image-container">
         <img src={loginImage} alt="Login Illustration" />
       </div>
+      <div className="demoDetails">
+      <div>Username: demo</div>
+      <div>Password: demo</div>
+    </div>
     </div>
   );
 };
