@@ -1,0 +1,63 @@
+/* Use sans-serif font for all text within the container */
+.report-container {
+    display: flex;
+    flex-direction: row;      /* Place the sections side by side */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;                /* Adjust gap as needed */
+    font-family: sans-serif;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  /* Each report section styling */
+  .report-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;   /* Adjust width as needed */
+    text-align: center;
+  }
+  
+  /* Header styling - appears within each section */
+  .report-header {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #161515;
+  }
+  
+  /* Button group layout */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  /* Rounded button styling */
+  .rounded-button {
+    background-color: #0096D1;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .rounded-button:hover {
+    background-color: #0078a0;
+    transform: scale(1.05);
+  }
+  
+  .rounded-button:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+    transform: none;
+  }
+  

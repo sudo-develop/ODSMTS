@@ -30,6 +30,7 @@ export const apis = {
       byRequestId: "/requests/request/{requestId}",  // New API for fetching request by ID
       byHospitalId: "/requests/hospital/{hospitalId}", // New API for fetching requests by hospital ID
       fulfillRequest: "/requests/fulfill",
+      create: "/requests/create"
     },
     users: {
       emails: "/users/emails/{hospitalId}", // ✅ New API for fetching emails
@@ -82,6 +83,20 @@ export const addDrugInventory = async (payload, token) => {
   } catch (error) {
     console.error("Add Inventory Error:", error.response?.data || error);
     throw error.response?.data?.message || "Failed to add inventory";
+  }
+};
+
+export const addRequest = async (payload, token) => {
+  try {
+    const response = await apiClient.post(apis.auth.requests.create, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    console.log("Request Added:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Add Request Error:", error.response?.data || error);
+    throw error.response?.data?.message || "Failed to add request";
   }
 };
 
